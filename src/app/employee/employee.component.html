@@ -1,0 +1,102 @@
+
+<div class="container">
+  <div>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+      placeholder="Search by name"
+    />
+  </div>
+  
+  <div *ngFor="let employee of filteredEmployees">
+    <p>{{ employee.ename }}</p>
+  </div>
+
+
+
+
+
+
+
+  <h3 class="text-success" align="center">Employee  Management System </h3>
+  <form (ngSubmit)="createEmployee()">
+
+      <div class="mb-3">
+          <label for="exampleInputName" class="form-label">Ename  : </label>
+          <input type="text" class="form-control" id="exampleInputName" [(ngModel)]="newEmp.ename"
+              name="newEmpName">
+      </div>
+      <div class="mb-3">
+          <label for="exampleInputDesig" class="form-label">Salary:</label>
+          <input type="text" class="form-control" id="exampleInpuSal" [(ngModel)]="newEmp.salary"
+              name="newEmpSal">
+      </div>
+
+
+      <div class="col-2">
+          <button class="btn btn-success" type="submit">Add Emp</button>
+      </div>
+  </form>
+
+
+
+      <div class="col-6">
+
+          <div *ngIf="editEmp">
+              <form (ngSubmit)="updateEmployee()">
+                  <label for="editTrainer">Edit Trainer:</label>
+                  <div class="form-group">
+                      <input type="text" [(ngModel)]="updateEmp.ename" name="updateEmpName"
+                          class="form-control" id="editErName"> <br>
+
+                  </div>
+                  <div class="form-group">
+                      <input type="text" [(ngModel)]="updateEmp.salary" name="updateEmpSalary"
+                          class="form-control" id="editTrainerDesign">
+
+                  </div>
+
+                  <div class="form-group mt-3">
+                      <button type="submit" class="btn btn-success mx-2">Save</button>
+                      <button type="submit" class="btn btn-danger" (click)="cancelEdit()">Cancel</button>
+
+                  </div>
+
+              </form>
+          </div>
+      </div>
+
+  </div>
+
+
+<!-- </div> -->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Employee List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped" border="border-3">
+        <thead>
+          <tr>
+            <th>Eid</th>
+            <th>Ename</th>
+            <th>Salary</th>
+            <th>Action</th>
+             </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of emp;">
+            <td>{{e.eid}}</td>
+            <td>{{e.ename}}</td>
+            <td>{{e.salary}}</td>
+            <td>
+                <button (click)="deleteEmployee(e.eid)" class="btn btn-danger">Delete</button>
+                <button (click)="editEmployee(e)" class="btn btn-info" style="margin-left: 10px">Update</button>
+                <!-- <button (click)="employeeDetails(e.eid)" class="btn btn-info" style="margin-left: 10px">Details</button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
